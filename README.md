@@ -4,10 +4,44 @@ thinkphp6.0 filesystem,include Local Aliyun  Qiniu Qcloud
 使用实例：
 
 1# .ENV 文件设置默认驱动aliyun
+
 [FILESYSTEM]
 DRIVER=aliyun
 
-2#Thinkphp6中使用示例
+2# filesystem.php 文件配置修改
+
+~~~
+return [
+    'default' => Env::get('filesystem.driver', 'local'),
+    'disks'   => [
+        'local'  => [
+            'type' => 'local',
+            'root' => app()->getRuntimePath() . 'storage',
+        ],
+        'public' => [
+            'type'       => 'local',
+            'root'       => app()->getRootPath() . 'public/storage',
+            'url'        => '/storage',
+            'visibility' => 'public',
+        ],
+        // 更多的磁盘配置信息
+        'aliyun' => [
+            'type'         => 'aliyun',
+            'accessId'     => '',
+            'accessSecret' => '',
+            'bucket'       => '',
+            'endpoint'     => 'oss-cn-beijing.aliyuncs.com',
+            'url'          => '',//不要斜杠结尾，此处为URL地址域名。
+            'water'        => '?x-oss-process=style/water',//图片样式处理
+            'nowater'      => '?x-oss-process=style/nowater',//图片样式处理
+        ]
+    ],
+
+];
+
+~~~
+
+3#Thinkphp6中使用示例
 ~~~
 $file = request()->file();
 if (empty($file) || !isset($file['img']) || empty($file['img'])) {
