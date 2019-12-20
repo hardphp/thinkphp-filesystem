@@ -26,6 +26,7 @@ class Aliyun extends Driver
             'accessSecret' => $this->config['accessSecret'],
             'bucket'       => $this->config['bucket'],
             'endpoint'     => $this->config['endpoint'],
+            'url'          => $this->config['url'],
         ]);
 
         return $aliyun;
