@@ -57,9 +57,6 @@ class OssAdapter extends AbstractAdapter
             if (!empty($config['token'])) {
                 $token = $config['token'];
             }
-            if (!empty($config['url'])) {
-                $this->setPathPrefix($config['url']);
-            }
             $this->oss = new OssClient(
                 $config['accessId'], $config['accessSecret'], $this->endpoint, $isCName, $token
             );
