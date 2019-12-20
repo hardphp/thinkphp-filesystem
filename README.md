@@ -32,8 +32,6 @@ return [
             'bucket'       => '',
             'endpoint'     => 'oss-cn-beijing.aliyuncs.com',
             'url'          => '',//不要斜杠结尾，此处为URL地址域名。
-            'water'        => '?x-oss-process=style/water',//图片样式处理
-            'nowater'      => '?x-oss-process=style/nowater',//图片样式处理
         ]
     ],
 
@@ -51,8 +49,9 @@ try {
     validate(['img' => 'fileSize:10485670|fileExt:jpg,gif,jpeg,png|fileMime:image/jpeg,image/gif,image/png'])
         ->check($file);
     $path = \think\facade\Filesystem::putFile('images', $file['img']);
-    return json_ok(['path' => $path]);
+    $path = \think\facade\Filesystem::geturl($path);
+    return  $path;
 } catch (\think\exception\ValidateException $e) {
-    return json_error($e->getMessage());
+    return $e->getMessage();
 }
 ~~~
