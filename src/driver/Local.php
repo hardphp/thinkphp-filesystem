@@ -38,4 +38,10 @@ class Local extends Driver
             $this->config['root'], LOCK_EX, $links, $permissions
         );
     }
+
+    public function geturl($path)
+    {
+        return isset($this->config['url']) && $this->config['url'] ? $this->config['url'] . DIRECTORY_SEPARATOR . $path
+            : $path;
+    }
 }
