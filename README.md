@@ -1,6 +1,9 @@
 # thinkphp-filesystem
 thinkphp6.0 filesystem,include Local Aliyun  Qiniu Qcloud
 
+#安装
+composer require hardphp/thinkphp-filesystem
+
 使用实例：
 
 1# .ENV 文件设置默认驱动aliyun
